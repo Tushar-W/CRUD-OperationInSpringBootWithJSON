@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 public class ProductRepositoryImpl implements IProductRepository{
-    private List<Product> productList = null;
+    private List<Product> productList;
 
     @Override
     public List<Product> findAllProduct() {
@@ -20,7 +20,8 @@ public class ProductRepositoryImpl implements IProductRepository{
         try {
             InputStream inputStream = new FileInputStream(new File("./src/main/resources/product.json"));
             TypeReference<List<Product>> typeReference = new TypeReference<List<Product>>() {};
-            return productList=objectMapper.readValue(inputStream, typeReference);
+            productList=objectMapper.readValue(inputStream, typeReference);
+            return productList;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (JsonParseException e) {
@@ -29,6 +30,17 @@ public class ProductRepositoryImpl implements IProductRepository{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Product findProductById(Integer id) {
+        productList = findAllProduct();
+        for (Product product: productList) {
+            if (product.getId()==id){
+                return product;
+            }
         }
         return null;
     }
