@@ -1,7 +1,1 @@
-[
- {
-   "id": "1",
-  "name": "Redme-Note3",
-  "price": "12999"
-  }
-]
+[{"id":1,"name":"Redme-Note3","price":12999.0},{"id":2,"name":"LG","price":10000.0},{"id":3,"name":"Apple","price":60000.0},{"id":null,"name":"Jio","price":6000.0}]
