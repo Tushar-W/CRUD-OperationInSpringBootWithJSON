@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public class ProductRepositoryImpl implements IProductRepository{
     private List<Product> productList;
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public List<Product> getAllProducts() {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             InputStream inputStream = new FileInputStream(new File("./src/main/resources/product.json"));
             TypeReference<List<Product>> typeReference = new TypeReference<List<Product>>() {};
             productList = objectMapper.readValue(inputStream, typeReference);
@@ -48,8 +48,20 @@ public class ProductRepositoryImpl implements IProductRepository{
     @Override
     public void saveProduct(Product product) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             productList.add(product);
+            objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void updateProduct(Integer id, Product product) {
+        try {
+            Product product1 = findProductById(id);
+            product1.setName(product.getName()== null ? product1.getName() : product.getName());
+            product1.setPrice(product.getPrice()== 0 ? product1.getPrice() : product.getPrice());
+            productList.add(product1);
             objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
         } catch (IOException e) {
             e.printStackTrace();
