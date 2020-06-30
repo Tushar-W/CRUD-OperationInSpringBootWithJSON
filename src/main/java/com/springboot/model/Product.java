@@ -1,24 +1,24 @@
 package com.springboot.model;
 
 public class Product {
-    private Integer id;
+    private int id;
     private String name;
     private float price;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, float price) {
+    public Product(int id, String name, float price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

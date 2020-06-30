@@ -35,7 +35,7 @@ public class ProductRepositoryImpl implements IProductRepository{
     }
 
     @Override
-    public Product findProductById(Integer id) {
+    public Product findProductById(int id) {
         productList = getAllProducts();
         for (Product product: productList) {
             if (product.getId()==id){
@@ -46,25 +46,40 @@ public class ProductRepositoryImpl implements IProductRepository{
     }
 
     @Override
-    public void saveProduct(Product product) {
+    public String saveProduct(Product product) {
         try {
             productList.add(product);
             objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "product added successfully";
     }
 
     @Override
-    public void updateProduct(Integer id, Product product) {
-        try {
+    public String updateProduct(int id, Product product) {
+        //try {
             Product product1 = findProductById(id);
             product1.setName(product.getName()== null ? product1.getName() : product.getName());
             product1.setPrice(product.getPrice()== 0 ? product1.getPrice() : product.getPrice());
             productList.add(product1);
+            /*objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        return "product updated successfully";
+    }
+
+    @Override
+    public String deleteProduct(int id) {
+        try {
+            Product product = findProductById(id);
+            productList.remove(product);
             objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "product deleted successfully";
     }
+
 }

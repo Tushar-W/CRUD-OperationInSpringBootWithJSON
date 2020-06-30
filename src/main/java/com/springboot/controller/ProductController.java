@@ -25,17 +25,22 @@ public class ProductController {
     }
 
     @GetMapping("/getproduct/{id}")
-    public Product getProduct(@PathVariable Integer id){
+    public Product getProduct(@PathVariable int id){
         return productService.get(id);
     }
 
     @PostMapping("/addproduct")
-    public void addProduct(@RequestBody Product product) {
-        productService.saveProduct(product);
+    public String addProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
     @PutMapping("/updateproduct/{id}")
-    public void updateProduct(@PathVariable Integer id, @RequestBody Product product){
-        productService.updateProduct(id, product);
+    public String updateProduct(@PathVariable int id, @RequestBody Product product){
+        return productService.updateProduct(id, product);
+    }
+
+    @DeleteMapping("/deleteproduct/{id}")
+    public String deleteProduct(@PathVariable int id){
+        return productService.deleteProduct(id);
     }
 }

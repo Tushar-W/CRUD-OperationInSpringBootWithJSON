@@ -20,11 +20,15 @@ public class ProductService {
         return productRepository.findProductById(id);
     }
 
-    public void saveProduct(Product product){
-        productRepository.saveProduct(product);
+    public String saveProduct(Product product){
+        return productRepository.saveProduct(product);
     }
 
-    public void updateProduct(Integer id, Product product) {
-        productRepository.updateProduct(id, product);
+    public String updateProduct(Integer id, Product product) {
+        return productRepository.updateProduct(id, product);
+    }
+
+    public String deleteProduct(int id) {
+        return productRepository.deleteProduct(id);
     }
 }

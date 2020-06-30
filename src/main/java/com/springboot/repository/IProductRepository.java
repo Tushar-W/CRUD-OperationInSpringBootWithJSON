@@ -7,9 +7,11 @@ public interface IProductRepository {
 
     List<Product> getAllProducts();
 
-    Product findProductById(Integer id);
+    Product findProductById(int id);
 
-    void saveProduct(Product product);
+    String saveProduct(Product product);
 
-    void updateProduct(Integer id, Product product);
+    String updateProduct(int id, Product product);
+
+    String deleteProduct(int id);
 }
