@@ -58,15 +58,16 @@ public class ProductRepositoryImpl implements IProductRepository{
 
     @Override
     public String updateProduct(int id, Product product) {
-        //try {
+        try {
             Product product1 = findProductById(id);
             product1.setName(product.getName()== null ? product1.getName() : product.getName());
             product1.setPrice(product.getPrice()== 0 ? product1.getPrice() : product.getPrice());
+            productList.remove(product1);
             productList.add(product1);
-            /*objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
+            objectMapper.writeValue(new File("./src/main/resources/product.json"), productList);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
         return "product updated successfully";
     }
 
